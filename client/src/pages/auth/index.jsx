@@ -1,11 +1,12 @@
 import Background from "@/assets/Scribble-PNG-File.png"
-import Logo from "@/assets/logo.png"
-import Encryption from "@/assets/encryption.png"
 import HandEmoji from "@/assets/hand-emoji.png"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
+import { toast } from "sonner"
+import { apiClient } from "@/lib/api-client"
+import { SIGNUP_ROUTE } from "@/utils/constants"
 
 const Auth = () => {
 
@@ -13,12 +14,35 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const validateSignup = () => {
+    if (!email.length) {
+      toast.error("Email is required");
+      return false;
+    }
+    if (!password.length) {
+      toast.error("Password is required");
+      return false;
+    }
+    if (!confirmPassword.length) {
+      toast.error("Please enter your password again!");
+      return false;
+    }
+
+    if (password !== confirmPassword) {
+      toast.error("your passwords doesn't match");
+      return false;
+    }
+    return true;
+  }
   const handleLogin = async () => {
 
   }
 
   const handleSignup = async () => {
-
+    if (validateSignup()) {
+      const response = await apiClient.post(SIGNUP_ROUTE, {email, password});
+      console.log(response);
+    }
   }
   
   return (
