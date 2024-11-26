@@ -70,3 +70,27 @@ export const login = async (request, response, next) => {
         return response.status(500).send("Internal Server Error");
     }
 }
+
+export const getUserInfo = async (request, response, next) => {
+    try{
+        // console.log(request.userId);- The user ID is derived from the JWT token.
+
+        // Query db to find the user with the given id.
+        const userData = await User.findById(request.userId);
+        if(!userData) {
+            return response.status(404).send("User with the given id not found!");
+        }
+        return response.status(200).json({
+            id: userData.id,
+            email: userData.email,
+            profileSetup: userData.profileSetup,
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            image: userData.image,
+            color: userData.color,
+        });
+    }catch(err){
+        console.error({err});
+        return response.status(500).send("Internal Server Error");
+    }
+}
