@@ -8,6 +8,7 @@ import { getColor } from "@/lib/utils";
 import { FaTrash, FaPlus } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { colors } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const Profile = () => {
   const { userInfo } = useAppStore();
@@ -59,18 +60,21 @@ const Profile = () => {
             </div>
           
             <div className="w-full">
-              <Input placeholder="Second Name" type="text" onChange={e=>setLastName(e.target.value)} value={lastName} className="rounded-lg p-6 bg-[#2c2e3b] border-none" />
+              <Input placeholder="Last Name" type="text" onChange={e=>setLastName(e.target.value)} value={lastName} className="rounded-lg p-6 bg-[#2c2e3b] border-none" />
             </div>
             <div className="w-full flex gap-5">
               {
                 colors.map((color, index) => 
                 <div key={index} className={`${color} h-8 w-8 rounded-full cursor-pointer transition-all duration-300 
-                  ${selectedColor == index?"outline-white outline-4" : ""}`}>
-
-                </div>)
+                  ${selectedColor === index?"outline outline-white/50 outline-2" : ""}`}
+                  onClick={()=>setSelectedColor(index)}
+                  ></div>)
               }
             </div>
           </div>
+        </div>
+        <div className="w-full">
+          <Button className="h-16 w-full bg-purple-700 hover:bg-purple-900 transition-all duration-300" onClick={saveChanges}>Save Changes</Button>
         </div>
       </div>
     </div>
