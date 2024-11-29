@@ -85,7 +85,7 @@ const Auth = () => {
               <img src={HandEmoji} alt="Hand Emoji" className="h-[100px]" />
             </div>
             <p className="font-medium text-center">
-              Fill in the details to get started Privato!
+              Fill in the details to get started Privato Sphere!
             </p>
           </div>
           <div className="flex items-center justify-center w-full">
@@ -109,7 +109,7 @@ const Auth = () => {
           </div>
         </div>
         <div className="hidden xl:flex justify-center items-center">
-          <img src={Background} alt="Encryption Image" className="h-[700px]" />
+          <img src={Background} alt="Encryption Image" className="h-[600px] p-10" />
         </div>
       </div>
     </div>
