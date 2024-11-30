@@ -1,32 +1,80 @@
 import { useAppStore } from "@/store"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import { Avatar } from "@/components/ui/avatar";
 import { AvatarImage } from "@/components/ui/avatar";
 import { getColor } from "@/lib/utils";
-import { FaTrash, FaPlus } from "react-icons/fa";
+import { FaTrash, FaPlus, FaLessThanEqual } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { colors } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { UPDATE_PROFILE_ROUTE } from "@/utils/constants";
+import { apiClient } from "@/lib/api-client";
 
 const Profile = () => {
-  const { userInfo } = useAppStore();
+  const navigate = useNavigate();
+  const { userInfo, setUserInfo } = useAppStore();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [image, setSetImage] = useState(null);
   const [hovered, setHovered] = useState(null);
   const [selectedColor, setSelectedColor] = useState(0);
 
-  const saveChanges = async () => {
+  useEffect(() => {
+    if(userInfo.profileSetup) {
+      setFirstName(userInfo.firstName);
+      setLastName(userInfo.lastName);
+      setSelectedColor(userInfo.color);
+    }
+  }, [userInfo]);
 
+  const validateProfile = () => {
+    if(!firstName) {
+      toast.error("Firstname is required");
+      return false;
+    }
+    if(!lastName) {
+      toast.error("Lastname is required");
+      return false;
+    }
+    return true;
+  }
+
+  const saveChanges = async () => {
+    if(validateProfile()) {
+      try{
+        const response = await apiClient.post(UPDATE_PROFILE_ROUTE, {
+          firstName: firstName, 
+          lastName: lastName,
+          color: selectedColor
+        }, {withCredentials: true});
+      if(response.status === 200 && response.data) {
+        setUserInfo({...response.data});
+        toast.success("Profile updated successfully!");
+        navigate("/chat");
+      }
+      }catch(err) {
+        console.error(err);
+
+      }
+    }
+  }
+
+  const handleNavigate = () => {
+    if(userInfo.profileSetup) {
+      navigate("/chat");
+    } else {
+      toast.error("Please setup profile.");
+    }
   }
 
   return (
     <div className="bg-[#1b1c24] h-[100vh] flex items-center flex-col gap-10">
       <div className="flex flex-col gap-10 w-[80vw] md:w-max">
         <div>
-          <IoArrowBack className="text-4xl lg:text-6xl text-white/90 cursor-pointer" />
+          <IoArrowBack className="text-4xl lg:text-6xl text-white/90 cursor-pointer" onClick={handleNavigate}/>
         </div>
         <div className="grid grid-cols-2">
           <div className="h-full w-32 md:w-48 md:h-48 relative flex items-center justify-center" onMouseEnter={() => setHovered(true)} onMouseLeave={()=> setHovered(false)}>

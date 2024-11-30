@@ -1,14 +1,14 @@
-import Background from "@/assets/Scribble-PNG-File.png"
-import HandEmoji from "@/assets/hand-emoji.png"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import { toast } from "sonner"
-import { apiClient } from "@/lib/api-client"
-import { LOGIN_ROUTE, SIGNUP_ROUTE } from "@/utils/constants"
-import { useNavigate } from "react-router-dom"
-import { useAppStore } from "@/store"
+import Background from "@/assets/Scribble-PNG-File.png";
+import HandEmoji from "@/assets/hand-emoji.png";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { toast } from "sonner";
+import { apiClient } from "@/lib/api-client";
+import { LOGIN_ROUTE, SIGNUP_ROUTE } from "@/utils/constants";
+import { useNavigate } from "react-router-dom";
+import { useAppStore } from "@/store";
 
 const Auth = () => {
   const navigate = useNavigate();
