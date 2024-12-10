@@ -5,12 +5,12 @@ import { IoArrowBack } from "react-icons/io5";
 import { Avatar } from "@/components/ui/avatar";
 import { AvatarImage } from "@/components/ui/avatar";
 import { getColor } from "@/lib/utils";
-import { FaTrash, FaPlus, FaLessThanEqual } from "react-icons/fa";
+import { FaTrash, FaPlus } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { colors } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { ADD_PROFILE_IMAGE_ROUTE, UPDATE_PROFILE_ROUTE, HOST } from "@/utils/constants";
+import { ADD_PROFILE_IMAGE_ROUTE, UPDATE_PROFILE_ROUTE, HOST, REMOVE_PROFILE_IMAGE_ROUTE } from "@/utils/constants";
 import { apiClient } from "@/lib/api-client";
 
 const Profile = () => {
@@ -99,7 +99,18 @@ const Profile = () => {
   }
 
   const handleDeleteImage = async () => {
+    try{  
+      const response = await apiClient.delete(REMOVE_PROFILE_IMAGE_ROUTE, {withCredentials: true});
 
+      if(response.status === 200) {
+        setUserInfo({...userInfo, image: null});
+        toast.success("Image removed successfully!");
+        setImage(null);
+      }
+
+    }catch(err){
+      console.error(err);
+    }
   }
 
 
