@@ -1,5 +1,6 @@
 import { clsx } from "clsx";
-import { twMerge } from "tailwind-merge"
+import { twMerge } from "tailwind-merge";
+import animationData from "@/assets/lottie-json";
 
 // All the utlity functions
 
@@ -20,4 +21,10 @@ export const getColor = (color) => {
     return colors[color]
   }
   return colors[0];
+}
+
+export const animationDefaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData,
 }
