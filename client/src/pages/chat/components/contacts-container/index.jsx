@@ -4,9 +4,14 @@ const ContactsContainer = () => {
         <div className="pt-1">
           <Logo />
         </div>
-        <div className="my-5">
-          <div className="flex items-center justify-between pr-10  ">
-
+        <div className="my-2">
+          <div className="flex items-center justify-between pr-10">
+            <Title text={"Direct Message"}/>
+          </div>
+        </div>
+        <div className="my-2">
+          <div className="flex items-center justify-between pr-10">
+            <Title text={"Channels"}/>
           </div>
         </div>
     </div>
@@ -16,9 +21,9 @@ const ContactsContainer = () => {
 const Logo = () => {
   return (
     <div className="flex p-5 justify-start items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 200">
         <g transform="translate(0, 0)">
-          <circle cx="100" cy="100" r="90" fill="#3498db" />
+          <circle cx="100" cy="100" r="90" fill="#8417FF" />
           <path d="M60 70 L140 70 L100 130 Z" fill="#ffffff" opacity="0.9" />
           <circle cx="100" cy="85" r="15" fill="#2980b9" />
           <path d="M40 100 Q100 150 160 100" stroke="#ffffff" stroke-width="4" fill="none" opacity="0.6" />
@@ -26,8 +31,8 @@ const Logo = () => {
         </g>
         <g transform="translate(200, 100)">
           <text font-family="Arial, sans-serif" font-weight="bold" font-size="36">
-            <tspan fill="#3498db">Privato</tspan>
-            <tspan x="120" fill="#2980b9">Sphere</tspan>
+            <tspan fill="#9852e9">Privato</tspan>
+            <tspan x="120" fill="#9852e9">Sphere</tspan>
           </text>
         </g>
       </svg>
